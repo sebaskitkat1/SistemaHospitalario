@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>HospitalSystem</RootNamespace>
+    <AssemblyName>HospitalSystem</AssemblyName>
+    <ApplicationIcon></ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Iconografía moderna para reemplazar emojis -->
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+    <!-- Driver Oracle (a usar cuando conectes la BD; no se utiliza en esta plantilla visual) -->
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.6.0" />
+  </ItemGroup>
+
+</Project>
