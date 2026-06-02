@@ -1,3 +1,5 @@
+using HospitalSystem.Data;
+
 namespace HospitalSystem.Forms.Auth;
 
 public partial class FrmLoginPersonal : Form
@@ -9,8 +11,29 @@ public partial class FrmLoginPersonal : Form
 
     private void btnIniciarSesion_Click(object sender, EventArgs e)
     {
-        // TODO: validar credenciales contra tabla usuarios.
-        // Según rol/permisos abrir FrmAdminDashboard o FrmSuperAdminDashboard.
+        if (string.IsNullOrEmpty(txtUsuario.Text) || string.IsNullOrEmpty(txtPassword.Text))
+        {
+            MessageBox.Show("Ingresa usuario y contraseña.", "Aviso",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        bool ok = UsuarioService.Login(txtUsuario.Text.Trim(), txtPassword.Text);
+
+        if (!ok)
+        {
+            MessageBox.Show("Usuario o contraseña incorrectos.", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        string rol = UsuarioService.UsuarioActivo!.RolNombre;
+
+        if (rol == "ADMINISTRADOR" || rol == "RECEPCIONISTA" || rol == "MEDICO")
+        {
+            new Forms.Admin.FrmAdminDashboard().Show();
+            Hide();
+        }
     }
 
     private void chkMostrarPwd_CheckedChanged(object sender, EventArgs e)
